@@ -4,3 +4,4 @@
 *.difypkg
 *.whl
 /tmp/*
+.idea/*

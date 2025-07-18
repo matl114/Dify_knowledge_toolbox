@@ -1,4 +1,5 @@
 @echo off
+mkdir wheels
 rmdir /s /q "./tmp" 
 mkdir tmp
 findstr /v /c:"find-links" requirements.txt > ./tmp/requirements.txt
