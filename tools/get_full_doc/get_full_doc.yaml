@@ -6,7 +6,6 @@ identity:
     ja_JP: 全文を取得
     zh_Hans: 获取完整文档
     pt_BR: Obter documento completo
-
 description:
   human:
     en_US: Retrieve the full doc by concatenating all the chunks of the specified document in Knowledge.

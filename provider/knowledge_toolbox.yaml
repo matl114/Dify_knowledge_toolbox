@@ -1,18 +1,22 @@
 identity:
-  author: kurokobo
+  author: juntiankeji
   name: knowledge_toolbox
   label:
     en_US: Knowledge Toolbox
   description:
-    en_US: Small tools for working with Dify Knowledge API.
-    ja_JP: Dify のナレッジ API を操作する小さなツール集。
-    zh_Hans: 用于操作 Dify Knowledge API 的小工具集。
-    pt_BR: Pequenas ferramentas para trabalhar com a Dify Knowledge API.
+    en_US: 用于操作 KnowledgeAPI 和 File 的小工具集。
+    ja_JP: 用于操作 KnowledgeAPI 和 File 的小工具集。
+    zh_Hans: 用于操作 KnowledgeAPI 和 File 的小工具集。
+    pt_BR: 用于操作 KnowledgeAPI 和 File 的小工具集。
   icon: icon.svg
-
+  
 tools:
   - tools/download_file/download_file.yaml
   - tools/get_full_doc/get_full_doc.yaml
+  - tools/search_file_in_dataset/search_file_in_dataset.yaml
+  - tools/search_dataset/search_dataset.yaml
+  - tools/operate_file/operate_file.yaml
+  - tools/save_as_file/save_as_file.yaml
 
 extra:
   python:

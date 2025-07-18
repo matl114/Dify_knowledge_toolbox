@@ -1,0 +1,70 @@
+identity:
+  name: operate_file
+  author: kurokobo
+  label:
+    en_US: 文件操作
+    ja_JP: 文件操作
+    zh_Hans: 文件操作
+    pt_BR: 文件操作
+description:
+  human:
+    en_US: Get a download URL for a file object, optionally as a markdown link.
+    ja_JP: ファイルオブジェクトのダウンロード URL を取得し、オプションで Markdown リンクとして出力します。
+    zh_Hans: 对File对象进行简易操作,通过operate_type指定操作
+    pt_BR: Obtenha uma URL de download para um objeto de arquivo, opcionalmente como um link markdown.
+  llm: Get a download URL for a file object, optionally as a markdown link.
+
+parameters:
+  - name: operate_type
+    type: select
+    label:
+      en_US: Operate Type
+    human_description:
+      en_US: 文件对象操作类型,支持Get Url, Dump Json, Save File, Encode base64
+      ja_JP: 文件对象操作类型,支持Get Url, Dump Json, Save File, Encode base64
+      zh_Hans: 文件对象操作类型,支持Get Url, Dump Json, Save File, Encode base64
+      pt_BR: 文件对象操作类型,支持Get Url, Dump Json, Save File, Encode base64
+    options:
+      - value: "get_url"
+        label:
+          en_US: "Get Url"
+      - value: "dump_json"
+        label:
+          en_US: "Dump Json"
+      - value: "encode_b64"
+        label:
+          en_US: "Encode base64 str"
+      - value: "encode_b64_uri"
+        label:
+          en_US: "Encode base64 URI"
+    required: true
+    default: "get_url"
+    form: "form"
+
+  - name: file
+    type: file
+    label:
+      en_US: File
+    human_description:
+      en_US: 操作的文件对象
+      ja_JP: 操作的文件对象
+      zh_Hans: 操作的文件对象
+      pt_BR: 操作的文件对象
+    required: true
+    form: llm
+    
+  - name: default_file_url
+    type: string
+    label:
+      en_US: The default file url
+    human_description:
+      en_US: 缺省的文件url前缀.若已在.env中设置FILE_URL属性,则可以不填
+      ja_JP: 缺省的文件url前缀.若已在.env中设置FILE_URL属性,则可以不填
+      zh_Hans: 缺省的文件url前缀.若已在.env中设置FILE_URL属性,则可以不填
+      pt_BR: 缺省的文件url前缀.若已在.env中设置FILE_URL属性,则可以不填
+    required: true
+    default: ""
+    form: llm
+extra:
+  python:
+    source: tools/operate_file/operate_file.py

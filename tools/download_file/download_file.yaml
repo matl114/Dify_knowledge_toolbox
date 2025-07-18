@@ -6,7 +6,6 @@ identity:
     ja_JP: ファイルをダウンロード
     zh_Hans: 下载文件
     pt_BR: Baixar arquivo
-
 description:
   human:
     en_US: Retrieve the uploaded file in Knowledge as a JSON, download URL, file object, or file content.

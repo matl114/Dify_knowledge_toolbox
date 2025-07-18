@@ -1,0 +1,168 @@
+identity:
+  name: search_file_in_dataset
+  author: juntiankeji
+  label:
+    en_US: File Search
+    ja_JP: 文档名称检索
+    zh_Hans: 文档名称检索
+    pt_BR: 文档名称检索
+description:
+  human:
+    en_US: 以 文档名称列表或文档ID列表 的形式通过文档名称检索已上传到知识库的文档。
+    ja_JP: 以 文档名称列表或文档ID列表 的形式通过文档名称检索已上传到知识库的文档。
+    zh_Hans: 以 文档名称列表或文档ID列表 的形式通过文档名称检索已上传到知识库的文档。
+    pt_BR: 以 文档名称列表或文档ID列表 的形式通过文档名称检索已上传到知识库的文档。
+  llm: 以 文档名称列表或文档ID列表 的形式通过文档名称检索已上传到知识库的文档。
+parameters:
+  - name: api_base_url
+    type: string
+    label:
+      en_US: API Base URL
+    human_description:
+      en_US: >-
+        The base URL of the Knowledge API, with trailing "/v1".
+        Example: "https://api.dify.ai/v1", "http://api:5001/v1".
+      ja_JP: >-
+        ナレッジ API のベース URL（末尾に "/v1" を付ける）。
+        例: "https://api.dify.ai/v1", "http://api:5001/v1"。
+      zh_Hans: >-
+        Knowledge API 的基础 URL，结尾带有 "/v1"。
+        例如: "https://api.dify.ai/v1", "http://api:5001/v1"。
+      pt_BR: >-
+        A URL base da API do Knowledge, terminando com "/v1".
+        Exemplo: "https://api.dify.ai/v1", "http://api:5001/v1".
+    required: true
+    default: ""
+    form: llm
+
+  - name: api_key
+    type: secret-input
+    label:
+      en_US: API Key
+    human_description:
+      en_US: >-
+        The API key for the Knowledge API.
+        You can generate it at "Knowledge" -> "API Access" -> "API Key" in the Dify Console.
+      ja_JP: >-
+        ナレッジ API の API キー。
+        Dify のコンソールの "Knowledge" -> "API Access" -> "API Key" で発行できる。
+      zh_Hans: >-
+        Knowledge API 的 API 密钥。
+        可以在 Dify 控制台的“Knowledge”->“API Access”->“API Key”中生成。
+      pt_BR: >-
+        A chave de API para o Knowledge API。
+        Você pode gerá-la em "Knowledge" -> "API Access" -> "API Key" no Console Dify.
+    required: true
+    default: ""
+    form: llm
+
+  - name: knowledge_id
+    type: string
+    label:
+      en_US: Knowledge ID
+    human_description:
+      en_US: >-
+        The ID of the Knowledge to retrieve the uploaded file from.
+        You can find this ID in the URL of each Knowledge page (/datasets/<knowledge_id>).
+      ja_JP: >-
+        アップロードしたファイルを取得するナレッジの ID。
+        各ナレッジのページの URL（/datasets/<knowledge_id>）で確認できる。
+      zh_Hans: >-
+        要获取已上传文件的知识库 ID。
+        可以在每个知识库页面的 URL（/datasets/<knowledge_id>）中找到。
+      pt_BR: >-
+        O ID do Knowledge de onde recuperar o arquivo enviado。
+        Você pode encontrar esse ID na URL de cada página do Knowledge (/datasets/<knowledge_id>)。
+    required: true
+    default: ""
+    form: llm
+
+  - name: key_word
+    type: string
+    label:
+      en_US: Search key word
+    human_description:
+      en_US: >-
+        The ID of the document in the Knowledge to retrieve.
+        You can find this ID in the URL of each document page (/datasets/<knowledge_id>/documents/<document_id>).
+      ja_JP: >-
+        检索的关键词,含有关键词的文档将会被返回，当传入空字符串的时候返回所有文档
+      zh_Hans: >-
+        检索的关键词,含有关键词的文档将会被返回，当传入空字符串的时候返回所有文档
+      pt_BR: >-
+        检索的关键词,含有关键词的文档将会被返回，当传入空字符串的时候返回所有文档
+    required: false
+    default: ""
+    form: llm
+  - name: limit
+    type: number
+    label:
+      en_US: Limit of the output
+    human_description:
+      en_US: >-
+        输出的数量限制,-1为无限制
+      ja_JP: >-
+        输出的数量限制,-1为无限制
+      zh_Hans: >-
+        输出的数量限制,-1为无限制
+      pt_BR: >-
+        输出的数量限制,-1为无限制
+    required: false
+    default: "-1"
+    form: llm
+  - name: format
+    type: select
+    label:
+      en_US: Format of the output
+    human_description:
+      en_US: >-
+       输出的格式。Name表示文档名称,ID表示文档的ID,Meta则是全部信息
+      ja_JP: >-
+        输出的格式。Name表示文档名称,ID表示文档的ID,Meta则是全部信息
+      zh_Hans: >-
+        输出的格式。Name表示文档名称,ID表示文档的ID,Meta则是全部信息
+      pt_BR: >-
+        输出的格式。Name表示文档名称,ID表示文档的ID,Meta则是全部信息
+    options:
+      - value: "Name"
+        label:
+          en_US: "Name"
+      - value: "ID"
+        label:
+          en_US: "ID"
+      - value: "Meta"
+        label:
+          en_US: "Meta"
+    required: true
+    default: "ID"
+    form: form
+  - name: type
+    type: select
+    label:
+      en_US: Return Type
+    human_description:
+      en_US: >-
+        输出的方式。String Concat将会以逗号连接数据的字符串形式,String List将会以{list:[...]}的形式返回字符串列表,Json List将会以Json列表的形式返回若干Json对象(字符串会被包装在{value:...}中)
+      ja_JP: >-
+        输出的方式。String Concat将会以逗号连接数据的字符串形式,String List将会以{list:[...]}的形式返回字符串列表,Json List将会以Json列表的形式返回若干Json对象(字符串会被包装在{value:...}中)
+      zh_Hans: >-
+        输出的方式。String Concat将会以逗号连接数据的字符串形式,String List将会以{list:[...]}的形式返回字符串列表,Json List将会以Json列表的形式返回若干Json对象(字符串会被包装在{value:...}中)
+      pt_BR: >-
+        输出的方式。String Concat将会以逗号连接数据的字符串形式,String List将会以{list:[...]}的形式返回字符串列表,Json List将会以Json列表的形式返回若干Json对象(字符串会被包装在{value:...}中)
+    options:
+      - value: "string_concat"
+        label:
+          en_US: "String Concat"
+      - value: "string_list"
+        label:
+          en_US: "String List"
+      - value: "json_list"
+        label: 
+          en_US: "Json List"
+    required: true
+    default: "string_concat"
+    form: form
+ 
+extra:
+  python:
+    source: tools/search_file_in_dataset/search_file_in_dataset.py
