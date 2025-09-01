@@ -1,0 +1,111 @@
+identity:
+  name: set_cached_param
+  author: juntiankeji
+  label:
+    en_US: 缓存参数设置
+    ja_JP: 缓存参数设置
+    zh_Hans: 缓存参数设置 
+    pt_BR: 缓存参数设置
+description:
+  human:
+    en_US: 设置缓存的参数,用来在多次调用中节约参数填充,会在不同的workspace之间共享,需要注意重置参数;返回值是当前的Cache
+    ja_JP: 设置缓存的参数,用来在多次调用中节约参数填充,会在不同的workspace之间共享,需要注意重置参数;返回值是当前的Cache
+    zh_Hans: 设置缓存的参数,用来在多次调用中节约参数填充,会在不同的workspace之间共享,需要注意重置参数;返回值是当前的Cache
+    pt_BR: 设置缓存的参数,用来在多次调用中节约参数填充,会在不同的workspace之间共享,需要注意重置参数;返回值是当前的Cache
+  llm: set the param caches
+
+parameters:
+  - name: api_base_url
+    type: string
+    label:
+      en_US: API Base URL
+    human_description:
+      en_US: >-
+        设置缓存的API Base URL,缺省为None
+      ja_JP: >-
+        设置缓存的API Base URL,缺省为None
+      zh_Hans: >-
+        设置缓存的API Base URL,缺省为None
+      pt_BR: >-
+        设置缓存的API Base URL,缺省为None
+    required: false
+    default: ""
+    form: llm
+
+  - name: api_key
+    type: secret-input
+    label:
+      en_US: API Key
+    human_description:
+      en_US: >-
+        设置缓存的API Key,缺省为None
+      ja_JP: >-
+        设置缓存的API Key,缺省为None
+      zh_Hans: >-
+        设置缓存的API Key,缺省为None
+      pt_BR: >-
+        设置缓存的API Key,缺省为None
+    required: false
+    default: ""
+    form: llm
+
+  - name: knowledge_id
+    type: string
+    label:
+      en_US: Knowledge ID
+    human_description:
+      en_US: >-
+        设置缓存的Knowledge,缺省为None
+      ja_JP: >-
+        设置缓存的Knowledge,缺省为None
+      zh_Hans: >-
+        设置缓存的Knowledge,缺省为None
+      pt_BR: >-
+        设置缓存的Knowledge,缺省为None
+    required: false
+    default: ""
+    form: llm
+
+  - name: document_id 
+    type: string 
+    label:
+      en_US: Document ID 
+    human_description:
+      en_US: >-
+        设置缓存的Document,缺省为None
+      ja_JP: >-
+        设置缓存的Document,缺省为None
+      zh_Hans: >-
+        设置缓存的Document,缺省为None
+      pt_BR: >-
+        设置缓存的Document,缺省为None
+    required: false
+    default: ""
+    form: llm
+
+  - name: type 
+    type: select
+    label:
+      en_US: Modify Type
+    human_description:
+      en_US: >-
+        修改Cache的形式,对未填入的值,Keep保持当前值,Reset则重置为默认值
+      ja_JP: >-
+        修改Cache的形式,对未填入的值,Keep保持当前值,Reset则重置为默认值
+      zh_Hans: >-
+        修改Cache的形式,对未填入的值,Keep保持当前值,Reset则重置为默认值
+      pt_BR: >-
+        修改Cache的形式,对未填入的值,Keep保持当前值,Reset则重置为默认值
+    options:
+      - value: "keep"
+        label:
+          en_US: "Keep"
+      - value: "reset"
+        label:
+          en_US: "Reset"
+    required: true
+    default: "reset"
+    form: form
+extra:
+  python:
+    source: tools/cache_control/set_cached_param.py

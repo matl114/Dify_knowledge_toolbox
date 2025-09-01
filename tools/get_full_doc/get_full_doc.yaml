@@ -22,19 +22,19 @@ parameters:
       en_US: API Base URL
     human_description:
       en_US: >-
-        The base URL of the Knowledge API, with trailing "/v1".
-        Example: "https://api.dify.ai/v1", "http://api:5001/v1".
+        Knowledge API 的基础 URL，结尾带有 "/v1"。
+        例如: "https://api.dify.ai/v1", "http://api:5001/v1"。缺省为compose内部host
       ja_JP: >-
-        ナレッジ API のベース URL（末尾に "/v1" を付ける）。
-        例: "https://api.dify.ai/v1", "http://api:5001/v1"。
+        Knowledge API 的基础 URL，结尾带有 "/v1"。
+        例如: "https://api.dify.ai/v1", "http://api:5001/v1"。缺省为compose内部host
       zh_Hans: >-
         Knowledge API 的基础 URL，结尾带有 "/v1"。
-        例如: "https://api.dify.ai/v1", "http://api:5001/v1"。
+        例如: "https://api.dify.ai/v1", "http://api:5001/v1"。缺省为compose内部host
       pt_BR: >-
-        A URL base da API do Knowledge, terminando com "/v1".
-        Exemplo: "https://api.dify.ai/v1", "http://api:5001/v1".
-    required: true
-    default: ""
+        Knowledge API 的基础 URL，结尾带有 "/v1"。
+        例如: "https://api.dify.ai/v1", "http://api:5001/v1"。缺省为compose内部host
+    default: "http://nginx/v1"
+    required: false
     form: llm
 
   - name: api_key
@@ -54,7 +54,7 @@ parameters:
       pt_BR: >-
         A chave de API para o Knowledge API.
         Você pode gerá-la em "Knowledge" -> "API Access" -> "API Key" no Console Dify.
-    required: true
+    required: false
     default: ""
     form: llm
 
@@ -75,7 +75,7 @@ parameters:
       pt_BR: >-
         O ID do Knowledge de onde recuperar o arquivo enviado.
         Você pode encontrar esse ID na URL de cada página do Knowledge (/datasets/<knowledge_id>).
-    required: true
+    required: false
     default: ""
     form: llm
 
@@ -96,7 +96,7 @@ parameters:
       pt_BR: >-
         O ID do documento no Knowledge a ser recuperado.
         Você pode encontrar esse ID na URL de cada página de documento (/datasets/<knowledge_id>/documents/<document_id>).
-    required: true
+    required: false
     default: ""
     form: llm
 

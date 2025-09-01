@@ -1,0 +1,98 @@
+identity:
+  name: delete_file
+  author: juntiankeji
+  label:
+    en_US: 删除文件
+    ja_JP: 删除文件
+    zh_Hans: 删除文件
+    pt_BR: 删除文件
+description:
+  human:
+    en_US: 从指定知识库删除指定ID的文件
+    ja_JP: 从指定知识库删除指定ID的文件
+    zh_Hans: 从指定知识库删除指定ID的文件
+    pt_BR: 从指定知识库删除指定ID的文件
+  llm: delete file from Knowledge.
+
+parameters:
+
+  - name: api_base_url
+    type: string
+    label:
+      en_US: API Base URL
+    human_description:
+      en_US: >-
+        Knowledge API 的基础 URL，结尾带有 "/v1"。
+        例如: "https://api.dify.ai/v1", "http://api:5001/v1"。缺省为compose内部host
+      ja_JP: >-
+        Knowledge API 的基础 URL，结尾带有 "/v1"。
+        例如: "https://api.dify.ai/v1", "http://api:5001/v1"。缺省为compose内部host
+      zh_Hans: >-
+        Knowledge API 的基础 URL，结尾带有 "/v1"。
+        例如: "https://api.dify.ai/v1", "http://api:5001/v1"。缺省为compose内部host
+      pt_BR: >-
+        Knowledge API 的基础 URL，结尾带有 "/v1"。
+        例如: "https://api.dify.ai/v1", "http://api:5001/v1"。缺省为compose内部host
+    required: false
+    default: "http://nginx/v1"
+    form: llm
+
+  - name: api_key
+    type: secret-input
+    label:
+      en_US: API Key
+    human_description:
+      en_US: >-
+        The API key for the Knowledge API.
+        You can generate it at "Knowledge" -> "API Access" -> "API Key" in the Dify Console.
+      ja_JP: >-
+        ナレッジ API の API キー。
+        Dify のコンソールの "Knowledge" -> "API Access" -> "API Key" で発行できる。
+      zh_Hans: >-
+        Knowledge API 的 API 密钥。
+        可以在 Dify 控制台的“Knowledge”->“API Access”->“API Key”中生成。
+      pt_BR: >-
+        A chave de API para o Knowledge API。
+        Você pode gerá-la em "Knowledge" -> "API Access" -> "API Key" no Console Dify.
+    required: false
+    default: ""
+    form: llm
+  - name: knowledge_id
+    type: string
+    label:
+      en_US: Knowledge ID
+    human_description:
+      en_US: >-
+        The ID of the Knowledge to retrieve the uploaded file from.
+        You can find this ID in the URL of each Knowledge page (/datasets/<knowledge_id>).
+      ja_JP: >-
+        アップロードしたファイルを取得するナレッジの ID。
+        各ナレッジのページの URL（/datasets/<knowledge_id>）で確認できる。
+      zh_Hans: >-
+        要获取已上传文件的知识库 ID。
+        可以在每个知识库页面的 URL（/datasets/<knowledge_id>）中找到。
+      pt_BR: >-
+        O ID do Knowledge de onde recuperar o arquivo enviado。
+        Você pode encontrar esse ID na URL de cada página do Knowledge (/datasets/<knowledge_id>)。
+    required: false
+    default: ""
+    form: llm
+  - name: document_id
+    type: string
+    label:
+      en_US: Document Id
+    human_description:
+      en_US: >-
+        即将删除的文件ID
+      ja_JP: >-
+        即将删除的文件ID
+      zh_Hans: >-
+        即将删除的文件ID
+      pt_BR: >-
+        即将删除的文件ID
+    required: true
+    default: ""
+    form: llm
+extra:
+  python:
+    source: tools/delete_file/delete_file.py

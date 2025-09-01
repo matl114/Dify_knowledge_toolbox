@@ -6,21 +6,17 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from utils.request_utlis import _request
 from utils.json_wrap_utils import _wrap, _stringify, _stringify_and_wrap_list
-
+from utils.dataset_utils import DifyDatasetInfo
 
 class SearchDatasetTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
-        passapi_base_url = tool_parameters.get("api_base_url")
-        api_key = tool_parameters.get("api_key")
+        dataset = DifyDatasetInfo(**tool_parameters)
         key_word = tool_parameters.get("knowledge_name", "")
         return_type = tool_parameters.get("return", "AnyId")
         limit = tool_parameters.get("limit", -1)
-        header = {
-            "authorization": f"bearer {api_key}",
-            "content-type": "application/json",
-        }
+        header = dataset.header()
         values = []
-        request_url = f"{passapi_base_url.rstrip('/')}/datasets"
+        request_url = dataset.endpoint(None)     
         parameters = f"limit=100&&page=1{'' if key_word == '' else f'&&keyword={key_word}'}"
         response = _request(request_url, parameters, header)
         if isinstance(response, Exception):

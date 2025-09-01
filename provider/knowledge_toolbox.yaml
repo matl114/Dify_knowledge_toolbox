@@ -17,7 +17,11 @@ tools:
   - tools/search_dataset/search_dataset.yaml
   - tools/operate_file/operate_file.yaml
   - tools/save_as_file/save_as_file.yaml
-
+  - tools/upload_file/upload_file.yaml
+  - tools/delete_file/delete_file.yaml
+  - tools/cache_control/set_cached_param.yaml
+  - tools/retrieve_knowledge/retrieve_knowledge.yaml
+  - tools/retrieve_knowledge/fast_retrieve.yaml
 extra:
   python:
     source: provider/knowledge_toolbox.py

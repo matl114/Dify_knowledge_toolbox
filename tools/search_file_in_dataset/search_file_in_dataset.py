@@ -7,24 +7,20 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from utils.request_utlis import _request
 from utils.json_wrap_utils import _wrap, _stringify, _stringify_and_wrap_list
+from utils.dataset_utils import DifyDatasetInfo
 
 class SearchFileInDatasetTool(Tool):
 
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
-        passapi_base_url = tool_parameters.get("api_base_url")
-        api_key = tool_parameters.get("api_key")
-        knowledge_id = tool_parameters.get("knowledge_id")
+        dataset = DifyDatasetInfo(**tool_parameters)
         key_word = tool_parameters.get("key_word")
         format = tool_parameters.get("format", "ID")
         type = tool_parameters.get("type", "String")
         limit = tool_parameters.get("limit", -1)
-        header = {
-            "authorization": f"bearer {api_key}",
-            "content-type": "application/json",
-        }
+        header = dataset.header()
         # test document
         datas = []
-        request_url = f"{passapi_base_url.rstrip('/')}/datasets/{knowledge_id}/documents"
+        request_url = dataset.endpoint_dat(None)
         parameters = f"limit=100&&page=1{'' if key_word == '' else f'&&keyword={key_word}'}"
         response = _request(request_url, parameters, header)
         if isinstance(response, Exception):

@@ -42,7 +42,7 @@ parameters:
     form: "form"
 
   - name: file
-    type: file
+    type: files
     label:
       en_US: File
     human_description:
@@ -58,12 +58,12 @@ parameters:
     label:
       en_US: The default file url
     human_description:
-      en_US: 缺省的文件url前缀.若已在.env中设置FILE_URL属性,则可以不填
-      ja_JP: 缺省的文件url前缀.若已在.env中设置FILE_URL属性,则可以不填
-      zh_Hans: 缺省的文件url前缀.若已在.env中设置FILE_URL属性,则可以不填
-      pt_BR: 缺省的文件url前缀.若已在.env中设置FILE_URL属性,则可以不填
-    required: true
-    default: ""
+      en_US: 缺省的文件url前缀,默认http://nginx.若已在.env中设置FILE_URL属性,则可以不填
+      ja_JP: 缺省的文件url前缀,默认http://nginx.若已在.env中设置FILE_URL属性,则可以不填
+      zh_Hans: 缺省的文件url前缀,默认http://nginx.若已在.env中设置FILE_URL属性,则可以不填
+      pt_BR: 缺省的文件url前缀,默认http://nginx.若已在.env中设置FILE_URL属性,则可以不填
+    required: false
+    default: "http://nginx"
     form: llm
 extra:
   python:

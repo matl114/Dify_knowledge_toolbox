@@ -5,24 +5,18 @@ import requests
 
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
+from utils.dataset_utils import DifyDatasetInfo
+from utils.request_utlis import _get_fixed_url
 
 
 class DownloadFileTool(Tool):
 
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
-        api_base_url = tool_parameters.get("api_base_url")
-        api_key = tool_parameters.get("api_key")
-        knowledge_id = tool_parameters.get("knowledge_id")
-        document_id = tool_parameters.get("document_id")
+        dataset = DifyDatasetInfo(**tool_parameters)
         format = tool_parameters.get("format", "url")
-
+        url = dataset.endpoint_doc("upload-file")
+        headers = dataset.header()
         # step 1: get the upload-file endpoint
-        url = f"{api_base_url.rstrip('/')}/datasets/{knowledge_id}/documents/{document_id}/upload-file"
-        headers = {
-            "authorization": f"bearer {api_key}",
-            "content-type": "application/json",
-        }
-
         try:
             response = requests.get(url, headers=headers)
             response.raise_for_status()
@@ -48,7 +42,7 @@ class DownloadFileTool(Tool):
             return
 
         # step 2: fetch the file
-        fixed_url = api_base_url[:-3] + download_url if download_url.startswith("/files") else download_url
+        fixed_url = _get_fixed_url(download_url, dataset.api_base_url[:-3])
         try:
             file_response = requests.get(fixed_url)
             file_response.raise_for_status()

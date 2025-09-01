@@ -4,29 +4,22 @@ import requests
 
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
-
+from dify_plugin.entities.tool import ToolInvokeMessage
+from utils.dataset_utils import DifyDatasetInfo
 
 class GetFullDocTool(Tool):
 
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
-        api_base_url = tool_parameters.get("api_base_url")
-        api_key = tool_parameters.get("api_key")
-        knowledge_id = tool_parameters.get("knowledge_id")
-        document_id = tool_parameters.get("document_id")
+        dataset = DifyDatasetInfo(**tool_parameters)
+    
         delimiter = tool_parameters.get(
             "delimiter", "\n\n").encode().decode("unicode_escape")
-
-        url = f"{api_base_url.rstrip('/')}/datasets/{knowledge_id}/documents/{document_id}/segments"
-        headers = {
-            "authorization": f"bearer {api_key}",
-            "content-type": "application/json",
-        }
-
+        url = dataset.endpoint_doc("segments")
+        headers = dataset.header()
         all_data = []
         page = 1
         has_more = True
         params = {"limit": 100}
-
         try:
             while has_more:
                 params["page"] = page

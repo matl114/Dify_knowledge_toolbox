@@ -1,0 +1,53 @@
+identity:
+  name: fast_retrieve
+  author: juntiankeji
+  label:
+    en_US: 快速知识库查询
+    ja_JP: 快速知识库查询
+    zh_Hans: 快速知识库查询
+    pt_BR: 快速知识库查询
+description:
+  human:
+    en_US: 从指定知识库执行查询,其中大部分参数均已经指定
+    ja_JP: 从指定知识库执行查询,其中大部分参数均已经指定
+    zh_Hans: 从指定知识库执行查询,其中大部分参数均已经指定
+    pt_BR: 从指定知识库执行查询,其中大部分参数均已经指定
+  llm: retrieve from given knowledge dataset
+
+parameters:
+  - name: retrieve
+    type: string
+    label:
+      en_US: Search Content
+    human_description:
+      en_US: >-
+        检索参数
+      ja_JP: >-
+        检索参数
+      zh_Hans: >-
+        检索参数
+      pt_BR: >-
+        检索参数
+    required: false
+    default: ""
+    form: llm
+
+  - name: top_k
+    type: number
+    label:
+      en_US: Top K
+    human_description:
+      en_US: >-
+        Top K
+      ja_JP: >-
+        Top K
+      zh_Hans: >-
+        Top K
+      pt_BR: >-
+        Top K
+    required: true
+    default: "3"
+    form: llm
+extra:
+  python:
+    source: tools/retrieve_knowledge/fast_retrieve.py
